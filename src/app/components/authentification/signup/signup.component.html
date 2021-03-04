@@ -1,0 +1,26 @@
+
+<div class="row container" style="margin-top:4em;">
+   <div class="col-md-4 mx-auto">
+        <h2>Créer un compte</h2>
+        <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+
+              <label for="userName">Nom</label>
+              <input type="text" id="userName"  class="form-control" formControlName="userName">
+            <span *ngIf="formControls.userName.touched && formControls.userName.invalid" class="error">Invalid userName!</span>
+            </div>
+            <div class="form-group">
+                <label for="email">E-Mail</label>  
+              <input formControlName="email" type="email" id="email"  class="form-control">
+              <span *ngIf="formControls.email.touched && formControls.email.invalid" class="error">Invalid email!</span>
+            </div>
+            <div class="form-group">
+              <label for="password">Mot de passe</label>
+              <input formControlName="password" type="password" id="password" class="form-control">
+              <span *ngIf="formControls.password.touched && formControls.password.hasError('required')" class="error">Invalid password!</span>
+              <span *ngIf="formControls.password.touched && formControls.password.hasError('pattern')" class="error">Invalid password!</span>
+            </div>
+            <button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary">Créer un compte</button>
+          </form>
+   </div>
+</div>
