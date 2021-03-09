@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder , Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from './../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-signin',
@@ -7,9 +10,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SigninComponent implements OnInit {
 
-  constructor() { }
+  signInForm: FormGroup;
+
+
+  constructor(private formBuilder : FormBuilder,
+    private authService : AuthService) { }
 
   ngOnInit(): void {
+    this.initForm();
+  }
+
+  get formControls(){  return this.signInForm.controls;    }
+  
+  initForm(){
+    this.signInForm = this.formBuilder.group({
+      email : ['', [Validators.required, Validators.email]],
+      password : ['', [Validators.required,Validators.pattern('[0-9a-zA-Z]{6,}')]]
+
+    });
+    
+  }
+
+
+  onSubmit(){
+
+   /*  this.authService.createNewUser(this.signUpForm.value).then(() =>{
+     console.log('Succes registration !');
+      this.router.navigate(['/signin']);
+    }).catch(err => {
+      console.log('Error registration !',err);
+    });*/
+    this.authService.signInWithGoogle();
+
   }
 
 }
