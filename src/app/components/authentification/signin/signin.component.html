@@ -1,29 +1,29 @@
 
 <div class="row container" style="margin-top:4em;">
     <div class="col-md-4 mx-auto">
-         <h2>Connexion</h2>
+         <h2 i18n="form title | titre pour le composant authentification ">Authentification</h2>
          <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
              <div class="form-group">
-                 <label for="email">E-Mail</label>  
+                 <label for="email" i18n>Adresse E-Mail</label>  
                <input formControlName="email" type="email" id="email"  class="form-control">
-               <span *ngIf="formControls.email.touched && formControls.email.invalid" class="error">Invalid email!</span>
+               <span *ngIf="formControls.email.touched && formControls.email.invalid" class="error" i18n>Il faut entrer une adresse email valide</span>
              </div>
              <div class="form-group">
-               <label for="password">Mot de passe</label>
+               <label for="password" i18n>Mot de passe</label>
                <input formControlName="password" type="password" id="password" class="form-control">
-               <span *ngIf="formControls.password.touched && formControls.password.hasError('required')" class="error">Invalid password!</span>
-               <span *ngIf="formControls.password.touched && formControls.password.hasError('pattern')" class="error">Invalid password!</span>
+               <span *ngIf="formControls.password.touched && formControls.password.hasError('required')" class="error" i18n>Il faut entrer un mot de passe</span>
+               <span *ngIf="formControls.password.touched && formControls.password.hasError('pattern')" class="error" i18n>Le mot bde passe doit contenir aun moins 6 caractères</span>
              </div>
-             <button type="submit" [disabled]="!signInForm.valid" class="btn btn-primary btn-block">Connexion</button>
+             <button type="submit" [disabled]="!signInForm.valid" class="btn btn-primary btn-block" i18n>Connexion</button>
 
 
             <div class="col-md-12">
                 <div class="login-or">
                     <hr class="hr-or">
-                    <span class="span-or">ou</span>
+                    <span class="span-or" i18n>ou</span>
                 </div>
             </div>
-            <button type="button" class="btn btn-danger btn-block" (click)="signInWithGoogle();">se connecter avec Gmail</button>
+            <button type="button" class="btn btn-danger btn-block" (click)="signInWithGoogle()" i18n>se connecter avec Gmail</button>
 
 
            </form>

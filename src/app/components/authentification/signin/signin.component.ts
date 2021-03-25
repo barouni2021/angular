@@ -40,8 +40,12 @@ export class SigninComponent implements OnInit {
     }).catch(err => {
       console.log('Error registration !',err);
     });*/
-    this.authService.signInWithGoogle();
+    
 
+  }
+
+  signInWithGoogle(){
+    this.authService.signInWithGoogle();
   }
 
 }
