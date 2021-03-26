@@ -1,1 +1,14 @@
-<p>user-profile works!</p>
+<div class="row">
+    <div class="col-lg-4 mt-3">
+        <div class="border-buttom text-center pb-4">
+            <img [src]="user.photoURL || 'https://bootdey.com/img/content/avatar/avatar1.png'" alt="profile"
+            class="img-md rounded-circle mb-3" style="height:170px;width:170px;">
+                <div class="mb-3">
+                    <h3>{{ user?.displayName }}</h3>
+                    <h3>{{ user?.email }}</h3>
+                </div>
+                <button type="button" (click)="signOut();" class="btn btn-danger">Déconnecter...</button>
+
+        </div>
+    </div>
+</div>

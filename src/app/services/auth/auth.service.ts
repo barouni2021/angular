@@ -22,12 +22,7 @@ export class AuthService {
         }
 
        });
-
-
-
    }
-
-
 
   createNewUser(signUpForm){
     return this.afAut.createUserWithEmailAndPassword(signUpForm.email, signUpForm.password)
@@ -38,12 +33,12 @@ export class AuthService {
     });
   }
 
-  SetUserData(user, userName){
+  SetUserData(user, userName?){
     const userRef: AngularFirestoreDocument<any> = this.afs.doc('users/${user.uid}');
     const userData: User = {
       id: user.uid,
       email:user.email,
-      userName:user.userName
+      userName:user.userName || user.displayName,
     };
     return userRef.set(userData, {merge:true});
 
@@ -68,17 +63,18 @@ export class AuthService {
     });
 
   }
-/*
-  SetUserData(user, userName?){
-    const userRef:AngularFirestoreDocument<any> = this.afs.doc('user/${user.uid}');
-    const userData: User = {
-      id:user.uid,
-      email:user.email,
-      userName:userName || user.displayName,
-    };
 
-    return userRef.set(userData, {merge:true});
 
-  }*/
+  get isLoggedIn():boolean{
+    const user = JSON.parse(localStorage.getItem('user'));
+    return (user !== null) ? true : false;
+  }
+
+  signOut(){
+    return this.afAut.signOut().then(() => {localStorage.removeItem('user');
+    this.router.navigate(['signin']);
+  });
+  }
+
 
 }
