@@ -1,0 +1,28 @@
+<div class="row container" style="margin:1em;">
+
+    <div class="col-sm-6 col-sm-ofset-2">
+
+        <button type="button" class="btn btn-danger "   [routerLink]="['/book/book-form/add']">créer un nouveau livre</button>
+    </div>
+<table class="table">
+<thead>
+<tr>
+    <th scope="col">Titre</th>
+    <th scope="col">Auteur</th>
+    <th scope="col">Synopsis</th>
+</tr>
+
+</thead>
+<tbody>
+    <tr *ngFor="let book of books">
+        <td>{{book.title}}</td>
+        <td>{{book.author}}</td>
+        <td>{{book.synopsis}}</td>
+    </tr>
+</tbody>
+
+
+</table>
+
+
+ </div>

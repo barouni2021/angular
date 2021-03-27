@@ -14,12 +14,15 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { HttpClientModule } from '@angular/common/http';
 import { UserProfileModule } from './components/user-profile/user-profile.module';
+import { HeaderComponent } from './components/header/header.component';
+import { BookModule } from './components/book/book.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { UserProfileModule } from './components/user-profile/user-profile.module
     AngularFireAuthModule,
     AngularFirestoreModule,
     ReactiveFormsModule,
-    UserProfileModule
+    UserProfileModule,
+    BookModule
   ],
   providers: [],
   bootstrap: [AppComponent]
