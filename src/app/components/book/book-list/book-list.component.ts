@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Book } from './../../../models/book.model';
 import { BookService } from './../../../services/book/book.service';
 import { filter, tap, takeUntil} from 'rxjs/operators';
-import { Console } from 'node:console';
 
 @Component({
   selector: 'app-book-list',
@@ -19,7 +18,8 @@ books : Book[];
     this.bookService.getBooks().pipe(
       tap(books => { 
         this.books = books;
-      Console.log('books :',books);
+
+      console.log('books :',books);
     })
     ).subscribe();
   }

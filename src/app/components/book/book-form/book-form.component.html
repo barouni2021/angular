@@ -3,7 +3,6 @@
     <div class="col-md-4 mx-auto">
          <h2>Enregistrer un nouveau livre :</h2>
          <form [formGroup]="bookForm" (ngSubmit)="onSaveBook()">
-
              <div class="form-group"> 
                <label for="userName">Titre</label>
                <input type="text" id="title"  class="form-control" formControlName="title">
@@ -17,7 +16,7 @@
               </div>
 
               <div class="form-group"> 
-                <label for="synopsis">Auteur</label>
+                <label for="synopsis">synopsis</label>
                 <textarea id="synopsis"  class="form-control" formControlName="synopsis">
                  </textarea>
               </div>

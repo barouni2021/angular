@@ -12,6 +12,6 @@ constructor(public authService : AuthService){}
   title = 'books-app';
 
   
-  test(){this.authService.isLoggedIn}
+  //test(){this.authService.isLoggedIn}
 
 }

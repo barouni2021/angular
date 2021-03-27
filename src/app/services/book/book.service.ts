@@ -5,6 +5,8 @@ import { AngularFirestore, AngularFirestoreDocument,AngularFirestoreCollection }
 import {  Book } from './../../models/book.model';
 import { Observable } from 'rxjs';
 
+//import * as firebase from 'firebase';
+import { AngularFireStorage } from '@angular/fire/storage';
 
 
 @Injectable({
@@ -12,13 +14,15 @@ import { Observable } from 'rxjs';
 })
 export class BookService {
 
-books : Observable<Book>;
+books : Observable<Book[]>;
 booksCollection : AngularFirestoreCollection<Book>;
   
-  constructor(private afs: AngularFirestore, private router : Router ) { }
+  constructor(private afs: AngularFirestore, 
+              private router : Router , 
+              private storage : AngularFireStorage) { }
 
 
-addBook(book : Book){
+addBook(book: Book){
   return new Promise<any>((resolve, reject) => {
     this.afs.collection('books')
         .add(book)
@@ -32,9 +36,12 @@ addBook(book : Book){
 }  
 
 
-getBooks(): Observable<Book> {
+
+
+getBooks(): Observable<Book[]> {
   this.booksCollection  = this.afs.collection('books');
-  return this.books = this.booksCollection.valueChanges();
+   return this.books = this.booksCollection.valueChanges();
+  
 }
 
 }

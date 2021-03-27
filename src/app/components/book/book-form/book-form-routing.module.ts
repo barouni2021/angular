@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BookFormComponent } from './../book/book-form/book-form.component';
+import { BookFormComponent } from './book-form.component';
 
 const routes: Routes = [
   { path: ':action',   component:BookFormComponent},

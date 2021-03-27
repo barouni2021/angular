@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder , Validators, FormControl } from '@angular/forms';
-import { Routes, RouterModule, ActivatedRoute } from '@angular/router';
+import {FormsModule,ReactiveFormsModule} from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Subject , } from 'rxjs';
-import { BookService } from 'src/app/services/book/book.service';
-  import { filter, tap, takeUntil} from 'rxjs/operators';
+import { BookService } from './../../../services/book/book.service';
+import { filter, tap, takeUntil} from 'rxjs/operators';
+
 type FormAction = 'add' | 'edit';
 
 
@@ -46,21 +48,20 @@ get formControls(){  return this.bookForm.controls;    }
     this.bookForm = this.formBuilder.group({
       title : ['', [Validators.required]],
       author : ['', [Validators.required]],
-      synopsis :'',
+      synopsis :''
     });
     
   } 
 
 
-onSaveBook(){
-this.bookService.addBook(this.bookForm.value)
-
-}
-
+  onSaveBook(){
+    this.bookService.addBook(this.bookForm.value);
+  }
 
 
-ngOnDestroy(){
-  this.destroy$.next();
-  this.destroy$.complete();
-}
+
+  ngOnDestroy(){
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
