@@ -27,15 +27,21 @@ export class BookFormComponent implements OnInit, OnDestroy {
 Action : FormAction;
 bookForm : FormGroup;
 destroy$= new Subject();
+percentage : number;
+currentFileUpload :string;
+bookId: string;
 
 
 get formControls(){  return this.bookForm.controls;    }
 
   ngOnInit(): void {
     this.route.paramMap.pipe( 
-      filter(p => !p.has('bookId')), tap(p => {
+      filter(p => !p.has('bookId')), 
+      tap(p => {
       this.Action = p.get('action') as FormAction;
-      this.initForm();
+      this.bookId = p.get('bookId');
+      this.getBookbyId(this.bookId);
+      //this.initForm();
     }),
     takeUntil(this.destroy$),
     ).subscribe();
@@ -55,7 +61,18 @@ get formControls(){  return this.bookForm.controls;    }
 
 
   onSaveBook(){
-    this.bookService.addBook(this.bookForm.value);
+    let bookForm = this.bookForm.value;
+    bookForm.image  = this.currentFileUpload;
+    switch (this.Action){
+      case 'add' : 
+          this.bookService.addBook(bookForm); break;
+      case 'edit' : 
+          bookForm.id = this.bookId;
+          this.bookService.updateBook(bookForm); break;
+    }
+
+
+    
   }
 
 
@@ -64,4 +81,33 @@ get formControls(){  return this.bookForm.controls;    }
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+
+  detectFiles(event){
+    this.bookService.pushFileToStorage(event.target.files[0]).subscribe( percentage => {
+        console.log('pourcentage',percentage);
+        this.percentage = percentage;
+        if(this.percentage===100){
+          this.bookService.downloadURL.pipe(takeUntil(this.destroy$)
+          ).subscribe(currentFileUpload => {
+            this.currentFileUpload = currentFileUpload ;
+          });
+        }
+    });
+    
+  }
+
+  getBookbyId(bookId:string){
+    this.bookService.getBookbyId(bookId).subscribe(book => {
+      
+      this.bookForm = this.formBuilder.group({
+        title : [book.title, [Validators.required]],
+        author : [book.author, [Validators.required]],
+        synopsis :book.synopsis
+      });
+      this.currentFileUpload = book.image;
+    }
+      )
+  }
+
 }

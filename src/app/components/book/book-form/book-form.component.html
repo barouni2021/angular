@@ -1,7 +1,10 @@
 
 <div class="row container" style="margin-top:4em;">
     <div class="col-md-4 mx-auto">
-         <h2>Enregistrer un nouveau livre :</h2>
+      <ng-container [ngSwitch]="Action">
+         <h2 *ngSwitchCase="'add'">Enregistrer un nouveau livre :</h2>
+         <h2 *ngSwitchCase="'edit'">Modifier un nouveau livre :</h2>
+      </ng-container>
          <form [formGroup]="bookForm" (ngSubmit)="onSaveBook()">
              <div class="form-group"> 
                <label for="userName">Titre</label>
@@ -20,10 +23,27 @@
                 <textarea id="synopsis"  class="form-control" formControlName="synopsis">
                  </textarea>
               </div>
-
-
-             <button type="submit" [disabled]="!bookForm.valid" class="btn btn-primary">Enregistrer</button>
+               <button type="submit" [disabled]="!bookForm.valid" class="btn btn-primary">Enregistrer</button>
            </form>
     </div>
  </div>
+
+ <div class="form-group">
+   <input type="file" #fileInput hidden (change)="detectFiles($event)" class="form-contrrol" accept="image/*">
+   <img *ngIf="percentage===100 || currentFileUpload !== null"
+      style="max-height:250px; max-width:467px; margin-bottom:5px; object-fit:contain "
+      [src]="currentFileUpload" class="img-fluid" alt="image"><br>
+
+              
+ <div *ngIf="percentage!==100 && percentage !==null"
+ style="margin:1em 0;" class="progress mt-2">
+    <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ percentage }}"
+    aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width:percentage + '%' }" >{{ percentage }}%
+    </div>
+</div>
+
+<button type="button" class="btn btn-info" (click)="fileInput.click()" >Ajouter une photo </button>
+
+ </div>
+
  

@@ -24,4 +24,10 @@ books : Book[];
     ).subscribe();
   }
 
+
+  deleteBooK(bookId){
+    this.bookService.deleteBooK(bookId);
+
+  }
+
 }
